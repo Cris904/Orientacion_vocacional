@@ -13,9 +13,9 @@
             {% endif %}
 
             <div style="display: flex; color: gray;">
-                <p><img src="https://www.flaticon.com/svg/static/icons/svg/3003/3003280.svg" style="width: 17px; height: auto; margin-right: 10px;" alt="">Joined on {{ user.date }}</p>
+                <p><img src="https://www.flaticon.com/svg/static/icons/svg/3003/3003280.svg" style="width: 17px; height: auto; margin-right: 10px;" alt="">Unido en {{ user.date }}</p>
                 {% if user.bday %}
-                    <p><img src="https://www.flaticon.com/svg/static/icons/svg/3159/3159408.svg" style="width: 17px; height: auto; margin-right: 10px; margin-left: 20px;" alt="">Born {{ user.bday }}</p>
+                    <p><img src="https://www.flaticon.com/svg/static/icons/svg/3159/3159408.svg" style="width: 17px; height: auto; margin-right: 10px; margin-left: 20px;" alt="">Nacimiento {{ user.bday }}</p>
                 {% endif %}
             </div>
         </div>
@@ -104,7 +104,7 @@
                         {% endif %}
                     </div>
                 {% else %}
-                    <p style='font-style:italic; opacity:0.5'>This tweet was deleted by it's original author</p>
+                    <p style='font-style:italic; opacity:0.5'>Esta publicación fue eliminada por su autor original.</p>
                 {% endif %}
             </div>
 

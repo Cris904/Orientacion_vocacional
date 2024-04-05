@@ -1,12 +1,12 @@
 {% extends 'mainPage.html' %}
 {% block pageContent %}
-<h1 class="greeting">Bookmarked Posts</h1>
+<h1 class="greeting">Favoritos</h1>
 
 {% if empty %}
 
 <div class="empty">
     <img src="{{ url_for('static', filename='Images/SVG/box.svg') }}" alt="">
-    <p>You do not have any saved posts!</p>
+    <p>No tienes publicaciones favoritas</p>
 </div>
 
 {% else %}

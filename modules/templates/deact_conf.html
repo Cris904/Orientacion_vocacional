@@ -3,23 +3,23 @@
 {% block pageContent %}
 
     <div class="alert">
-        <h3>Are you sure you want to deactivate your account?</h3>
-        <p>The following protocols will be in effect on account deletion. Are you sure you want to proceed?</p>
+        <h3>¿Estás seguro de que quieres desactivar tu cuenta?</h3>
+        <p>Los siguientes protocolos estarán en efecto al eliminar la cuenta. ¿Estás seguro de que quieres proceder?</p>
         <br>
         <ul>
-            <li>Your account information will be deleted.</li>
-            <li>All your tweets will be deleted.</li>
-            <li>You will no longer be visible to other people.</li>
+            <li>Se eliminará la información de tu cuenta.</li>
+            <li>Se eliminarán todas tus publicaciones.</li>
+            <li>No serás visible para otras personas.</li>
         </ul>
         <br>
-        <p>This changes would be permanent. Are you sure you want to deactivate your account?</p>
+        <p>Estos cambios serán permanentes. ¿Estás seguro de que quieres desactivar tu cuenta?</p>        
     </div>
 
     <div class="choice alert">
         <form action="{{ url_for('delete_account',account_id=current_user.id) }}" method="post">
             <input type="submit" class="danger" value="Yes I understand, deactivate account"></input>
         </form>
-        <div class="neutral"><a href="{{ url_for('dashboard') }}">No, I have changed my mind</a></div>
+        <div class="neutral"><a href="{{ url_for('dashboard') }}">No, he cambiado de opinión.</a></div>
     </div>
 
 {% endblock %}

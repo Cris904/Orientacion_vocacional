@@ -1,0 +1,509 @@
+{% extends 'mainPage.html' %}
+
+{% block pageContent %}
+<h1 class="greeting">Bienvenido @{{ name }}!</h1>
+<div class="tweet">
+    {{form.csrf_token}}
+        <form id="careerForm" action="{{ url_for('formulario') }}" method="post">
+            <div style="display: flex;">
+                <div class="container">
+                <div class="pages">
+                    <div class="page">
+                        <h2>Página 1: Información Personal</h2>
+                        <fieldset>
+                            <legend>Información Personal</legend>
+                            <div class="form-group">
+                                <label for="edad">Edad:</label>
+                                <input type="number" id="edad" name="edad" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="genero">Género:</label>
+                                <select id="genero" name="genero" class="form-control" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="ubicacion">Ubicación (país/ciudad):</label>
+                                <select id="ubicacion" name="ubicacion" class="form-control" required onclick="resetOptions()">
+                                    <option value="Bogotá">Bogotá, Colombia</option>
+                                    <option value="Medellín">Medellín, Colombia</option>
+                                    <option value="Cali">Cali, Colombia</option>
+                                    <option value="Barranquilla">Barranquilla, Colombia</option>
+                                    <option value="Cartagena">Cartagena, Colombia</option>
+                                    <option value="Bucaramanga">Bucaramanga, Colombia</option>
+                                    <option value="Cúcuta">Cúcuta, Colombia</option>
+                                    <option value="Ibagué">Ibagué, Colombia</option>
+                                    <option value="Santa Marta">Santa Marta, Colombia</option>
+                                    <option value="Villavicencio">Villavicencio, Colombia</option>
+                                    <option value="Pasto">Pasto, Colombia</option>
+                                    <option value="Manizales">Manizales, Colombia</option>
+                                    <option value="Pereira">Pereira, Colombia</option>
+                                    <option value="Neiva">Neiva, Colombia</option>
+                                    <option value="Soledad">Soledad, Colombia</option>
+                                    <option value="Armenia">Armenia, Colombia</option>
+                                    <option value="Soacha">Soacha, Colombia</option>
+                                    <option value="Valledupar">Valledupar, Colombia</option>
+                                    <option value="Montería">Montería, Colombia</option>
+                                    <option value="Bello">Bello, Colombia</option>
+                                    <option value="Envigado">Envigado, Colombia</option>
+                                    <option value="Sincelejo">Sincelejo, Colombia</option>
+                                    <option value="Buenaventura">Buenaventura, Colombia</option>
+                                    <option value="Barrancabermeja">Barrancabermeja, Colombia</option>
+                                    <option value="Floridablanca">Floridablanca, Colombia</option>
+                                    <option value="Tuluá">Tuluá, Colombia</option>
+                                    <option value="Popayán">Popayán, Colombia</option>
+                                    <option value="Itagüí">Itagüí, Colombia</option>
+                                    <option value="Buga">Buga, Colombia</option>
+                                    <option value="Girón">Girón, Colombia</option>
+                                    <option value="Magangué">Magangué, Colombia</option>
+                                    <option value="Facatativá">Facatativá, Colombia</option>
+                                    <option value="Palmira">Palmira, Colombia</option>
+                                    <option value="Tumaco">Tumaco, Colombia</option>
+                                    <option value="Maicao">Maicao, Colombia</option>
+                                    <option value="Florencia">Florencia, Colombia</option>
+                                    <option value="Girardot">Girardot, Colombia</option>
+                                    <option value="Sogamoso">Sogamoso, Colombia</option>
+                                    <option value="Yopal">Yopal, Colombia</option>
+                                    <option value="Ocaña">Ocaña, Colombia</option>
+                                    <option value="Quibdó">Quibdó, Colombia</option>
+                                    <option value="Puerto Inírida">Puerto Inírida, Colombia</option>
+                                    <option value="Riohacha">Riohacha, Colombia</option>
+                                    <option value="Arauca">Arauca, Colombia</option>
+                                    <option value="San Andrés">San Andrés, Colombia</option>
+                                    <option value="Turbo">Turbo, Colombia</option>
+                                    <option value="Ciénaga">Ciénaga, Colombia</option>
+                                    <option value="Madrid">Madrid, Colombia</option>
+                                    <option value="Piedecuesta">Piedecuesta, Colombia</option>
+                                    <option value="Chía">Chía, Colombia</option>
+                                    <option value="Duitama">Duitama, Colombia</option>
+                                    <option value="Túquerres">Túquerres, Colombia</option>
+                                    <option value="Apartadó">Apartadó, Colombia</option>
+                                    <option value="Barrancas">Barrancas, Colombia</option>
+                                    <option value="Pitalito">Pitalito, Colombia</option>
+                                    <option value="Mocoa">Mocoa, Colombia</option>
+                                    <option value="La Dorada">La Dorada, Colombia</option>
+                                    <option value="Sabanalarga">Sabanalarga, Colombia</option>
+                                    <option value="Ipiales">Ipiales, Colombia</option>
+                                    <option value="Chinchiná">Chinchiná, Colombia</option>
+                                    <option value="Aguachica">Aguachica, Colombia</option>
+                                    <option value="El Carmen de Bolívar">El Carmen de Bolívar, Colombia</option>
+                                    <option value="Girardot">Girardot, Colombia</option>
+                                    <option value="Tunja">Tunja, Colombia</option>
+                                    <option value="Fusagasugá">Fusagasugá, Colombia</option>
+                                    <option value="Villa del Rosario">Villa del Rosario, Colombia</option>
+                                    <option value="Montelíbano">Montelíbano, Colombia</option>
+                                    <option value="Florencia">Florencia, Colombia</option>
+                                    <option value="San José del Guaviare">San José del Guaviare, Colombia</option>
+                                    <option value="Chiquinquirá">Chiquinquirá, Colombia</option>
+                                    <option value="Acacías">Acacías, Colombia</option>
+                                    <option value="Fusagasugá">Fusagasugá, Colombia</option>
+                                    <option value="Tuquerres">Tuquerres, Colombia</option>
+                                    <option value="Tulúa">Tulúa, Colombia</option>
+                                    <option value="El Bagre">El Bagre, Colombia</option>
+                                    <option value="Lorica">Lorica, Colombia</option>
+                                    <option value="Roldanillo">Roldanillo, Colombia</option>
+                                    <option value="Pamplona">Pamplona, Colombia</option>
+                                    <option value="Aguadas">Aguadas, Colombia</option>
+                                    <option value="Puerto Berrío">Puerto Berrío, Colombia</option>
+                                    <option value="San Juan del Cesar">San Juan del Cesar, Colombia</option>
+                                    <option value="Marsella">Marsella, Colombia</option>
+                                    <option value="Arauquita">Arauquita, Colombia</option>
+                            </select>  
+                            </div>                            
+                            <div class="form-group">
+                                <label for="estado_civil">Estado Civil:</label>
+                                <select id="estado_civil" name="estado_civil" class="form-control" required>
+                                    <option value="">Seleccione su estado civil</option>
+                                    <option value="Soltero">Soltero/a</option>
+                                    <option value="Casado">Casado/a</option>
+                                    <option value="Divorciado">Divorciado/a</option>
+                                    <option value="Viudo">Viudo/a</option>
+                                    <!-- Agrega más opciones según sea necesario -->
+                                </select>
+                            </div>                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="discapacidad_checkbox" name="discapacidad_checkbox">
+                                    ¿Tienes alguna discapacidad o condición de salud relevante?
+                                </label>
+                                <div id="discapacidad_input" style="display: none;">
+                                    <input type="text" id="discapacidad" name="discapacidad" class="form-control" placeholder="Si es así, ¿cuál?">
+                                </div>
+                            </div>                            
+                        </fieldset>
+                    </div>
+                    <div class="page">
+                        <h2>Página 2: Intereses y Habilidades</h2>
+                        <fieldset>
+                            <legend>Intereses y Habilidades</legend>
+                            <div class="form-group">
+                                <label for="intereses">¿Cuáles son tus intereses principales? (separados por coma):</label>
+                                <input type="text" id="intereses" name="intereses" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="habilidades">¿En qué materias o actividades destacas? (separadas por coma):</label>
+                                <input type="text" id="habilidades" name="habilidades" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tiempo_libre">¿Qué tipo de actividades te gusta realizar en tu tiempo libre?</label>
+                                <textarea id="tiempo_libre" name="tiempo_libre" class="form-control" required></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="page">
+                        <h2>Página 3: Expectativas y Experiencia</h2>
+                        <fieldset>
+                            <legend>Expectativas y Experiencia</legend>
+                            <div class="form-group">
+                                <label for="expectativas">¿Qué esperas de una carrera universitaria?</label>
+                                <textarea id="expectativas" name="expectativas" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="experiencia">¿Tienes alguna experiencia laboral relacionada con algún campo específico?</label>
+                                <textarea id="experiencia" name="experiencia" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="proyectos">¿Has participado en proyectos extracurriculares o actividades relacionadas con alguna área de estudio?</label>
+                                <textarea id="proyectos" name="proyectos" class="form-control" required></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="page">
+                        <h2>Página 4: Educación y Trayectoria Académica</h2>
+                        <fieldset>
+                            <legend>Educación y Trayectoria Académica</legend>
+                            <div class="form-group">
+                                <label for="nivel_educativo">¿Cuál es tu nivel educativo actual?</label>
+                                <select id="nivel_educativo" name="nivel_educativo" class="form-control" required>
+                                    <option value="">Selecciona tu nivel educativo</option>
+                                    <option value="Primaria">Primaria</option>
+                                    <option value="Secundaria">Secundaria</option>
+                                    <option value="Bachillerato">Bachillerato</option>
+                                    <!-- Agrega más opciones según sea necesario -->
+                                </select>
+                            </div>                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="tiene_titulo" name="tiene_titulo">
+                                    ¿Tienes algún título universitario o técnico?
+                                </label>
+                                <textarea id="titulo" name="titulo" class="form-control" style="display: none;" placeholder="Si es así, ¿en qué área?" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="tiene_curso" name="tiene_curso">
+                                    ¿Tienes algún curso, certificación o experiencia de aprendizaje relevante?
+                                </label>
+                                <textarea id="curso" name="curso" class="form-control" style="display: none;" placeholder="Si es así, ¿cuál?" required></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="page">
+                        <h2>Página 5: Preferencias y Estilo de Aprendizaje</h2>
+                        <fieldset>
+                            <legend>Preferencias y Estilo de Aprendizaje</legend>
+                            <div class="form-group">
+                                <label for="entorno_aprendizaje">¿Qué tipo de entorno de aprendizaje prefieres?</label>
+                                <select id="entorno_aprendizaje" name="entorno_aprendizaje" class="form-control" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="Presencial">Presencial</option>
+                                    <option value="Virtual">Virtual</option>
+                                    <option value="Mixto">Mixto</option>
+                                    <!-- Agrega más opciones según sea necesario -->
+                                </select>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="equilibrio">¿Qué importancia le das al equilibrio entre vida personal y académica?</label>
+                                <textarea id="equilibrio" name="equilibrio" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="enfoque">¿Prefieres un enfoque teórico o práctico en tus estudios?</label>
+                                <select id="enfoque" name="enfoque" class="form-control" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="Teórico">Teórico</option>
+                                    <option value="Práctico">Práctico</option>
+                                    <option value="Mixto">Mixto</option>
+                                    <!-- Agrega más opciones según sea necesario -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="tamaño_institucion" name="tamaño_institucion">
+                                    ¿Tienes alguna preferencia sobre el tamaño de la institución educativa?
+                                </label>
+                                <textarea id="tamaño" name="tamaño" class="form-control" style="display: none;" placeholder="Si es así, ¿en qué área?" required></textarea>
+                            </div>                                                                          
+                        </fieldset>        
+                    </div>
+                    <div class="page">
+                        <h2>Página 6: Planes Futuros y Carrera Profesional</h2>
+                        <fieldset>
+                            <legend>Planes Futuros y Carrera Profesional</legend>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="meta_profesional" name="meta_profesional">
+                                    ¿Tienes alguna meta profesional específica o un plan de carrera definido?
+                                </label>
+                                <textarea id="meta" name="meta" class="form-control" style="display: none;" placeholder="Si es así, ¿en qué área?" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="interes_areas" name="interes_areas">
+                                    ¿Tienes interés en áreas emergentes o tecnológicas?
+                                </label>
+                                <textarea id="interesesa" name="interesesa" class="form-control" style="display: none;" placeholder="Si es así, ¿en qué área?" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="posgrado" name="posgrado">
+                                    ¿Tienes algún plan de continuar tus estudios a nivel de posgrado?
+                                </label>
+                                <textarea id="otro_posgrado" name="otro_posgrado" class="form-control" style="display: none;" placeholder="Si es así, ¿en qué área?" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="pregunta_texto">Ingresa un comentario:</label>
+                                <textarea id="pregunta_texto" name="pregunta_texto" class="form-control" required></textarea>
+                            </div>
+                            
+                        </fieldset>
+                    </div> 
+                </div>
+            </div>
+    </div>
+            </div>
+                <div class="buttons">
+                    <button type="button" class="prev" onclick="prevPage()">Anterior</button>
+                    <button type="button" class="next" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>            
+</form>    
+</div>
+<script>
+let currentTab = 0;
+showTab(currentTab);
+
+function showTab(n) {
+    const pages = document.getElementsByClassName("page");
+    for (let i = 0; i < pages.length; i++) {
+        if (i === n) {
+            pages[i].style.display = "block";
+        } else {
+            pages[i].style.display = "none";
+        }
+    }
+    
+    if (n === 0) {
+        document.querySelector(".prev").style.display = "none";
+    } else {
+        document.querySelector(".prev").style.display = "inline";
+    }
+    
+    const nextButton = document.querySelector(".next");
+    if (n === pages.length - 1) {
+        // Cambiar el tipo de botón a "submit"
+        nextButton.type = "submit";
+        // Eliminar el evento onclick actual
+        nextButton.removeAttribute("onclick");
+        nextButton.innerHTML = "Enviar";
+    } else {
+        nextButton.type = "button"; // Cambiar de nuevo a "button" en caso de que se haya cambiado a "submit" antes
+        nextButton.innerHTML = "Siguiente";
+    }
+}
+
+function nextPage() {
+    const pages = document.getElementsByClassName("page");
+    const currentPage = pages[currentTab];
+    
+    // Realizar validación de campos en la página actual
+    if (validateFields(currentPage)) {
+        // Si la validación es exitosa, avanzar a la siguiente página
+        if (currentTab < pages.length - 1) {
+            pages[currentTab].style.display = "none";
+            currentTab++;
+            showTab(currentTab);
+        }
+    } else {
+        // Si la validación falla, mostrar un mensaje de alerta
+        alert("Por favor completa todos los campos antes de continuar.");
+    }
+}
+
+function validateFields(page) {
+    // Obtener todos los campos requeridos en la página actual
+    const requiredFields = page.querySelectorAll("[required]");
+    
+    // Iterar sobre los campos requeridos y verificar si están completos
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        
+        // Si es un campo de selección "Sí o No", también validar el campo adicional si es necesario
+        if (field.tagName === "SELECT" && field.value === "Si") {
+            const additionalField = document.getElementById("input" + field.id.charAt(0).toUpperCase() + field.id.slice(1)).querySelector("textarea");
+            if (additionalField.value.trim() === "") {
+                return false;
+            }
+        } else {
+            if (field.value.trim() === "") {
+                return false;
+            }
+        }
+    }
+    
+    // Si todos los campos están completos, retornar verdadero
+    return true;
+}
+
+// Función para mostrar u ocultar campos adicionales según la selección "Sí o No"
+function showInput(id) {
+    const selectElement = document.getElementById(id);
+    const inputElement = document.getElementById("input" + id.charAt(0).toUpperCase() + id.slice(1));
+
+    if (selectElement.value === "Si") {
+        inputElement.style.display = "block";
+    } else {
+        inputElement.style.display = "none";
+    }
+}
+
+var originalOptions; // Variable para almacenar las opciones originales
+
+    // Función para restablecer la visibilidad de las opciones originales
+    function resetOptions() {
+        var select = document.getElementById('ubicacion');
+        var options = select.getElementsByTagName('option');
+        for (var i = 0; i < options.length; i++) {
+            options[i].style.display = "";
+        }
+    }
+
+    // Función para filtrar las opciones según el texto ingresado
+    function filterOptions() {
+        var filter = document.getElementById('ubicacion').value.toUpperCase();
+        var select = document.getElementById('ubicacion');
+        var options = select.getElementsByTagName('option');
+        for (var i = 0; i < options.length; i++) {
+            var txtValue = options[i].textContent || options[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                options[i].style.display = "";
+            } else {
+                options[i].style.display = "none";
+            }
+        }
+    }
+
+    document.getElementById('discapacidad_checkbox').addEventListener('change', function() {
+        var discapacidadInput = document.getElementById('discapacidad_input');
+        if (this.checked) {
+            discapacidadInput.style.display = 'block';
+            discapacidadInput.querySelector('input').required = true;
+        } else {
+            discapacidadInput.style.display = 'none';
+            discapacidadInput.querySelector('input').required = false;
+        }
+    });
+
+    document.getElementById('tiene_titulo').addEventListener('change', function() {
+        var tituloInput = document.getElementById('titulo');
+        tituloInput.style.display = this.checked ? 'block' : 'none';
+        tituloInput.required = this.checked;
+    });
+
+    document.getElementById('tiene_curso').addEventListener('change', function() {
+        var cursoInput = document.getElementById('curso');
+        cursoInput.style.display = this.checked ? 'block' : 'none';
+        cursoInput.required = this.checked;
+    });
+
+    document.getElementById('tamaño_institucion').addEventListener('change', function() {
+        var tamañoInput = document.getElementById('tamaño');
+        tamañoInput.style.display = this.checked ? 'block' : 'none';
+        tamañoInput.required = this.checked;
+    });
+
+    document.getElementById('meta_profesional').addEventListener('change', function() {
+        var metaInput = document.getElementById('meta');
+        metaInput.style.display = this.checked ? 'block' : 'none';
+        metaInput.required = this.checked;
+    });
+
+    document.getElementById('interes_areas').addEventListener('change', function() {
+        var interesInput = document.getElementById('interesesa');
+        interesInput.style.display = this.checked ? 'block' : 'none';
+        interesInput.required = this.checked;
+    });
+
+    document.getElementById('posgrado').addEventListener('change', function() {
+        var postgradoInput = document.getElementById('otro_posgrado');
+        postgradoInput.style.display = this.checked ? 'block' : 'none';
+        postgradoInput.required = this.checked;
+    });
+
+</script>
+<style>
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .page {
+        display: none;
+    }
+
+    .page:first-child {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    .buttons button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #52958B;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .buttons button.prev {
+        background-color: #6c757d;
+    }
+
+    .buttons button:hover {
+        background-color: #99C185;
+    }
+</style>
+
+{% endblock %}

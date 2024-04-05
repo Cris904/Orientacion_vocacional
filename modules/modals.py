@@ -32,6 +32,33 @@ class Post(db.Model):
     timeline = db.relationship('Timeline',backref='from_post',lazy=True)
     bookmark = db.relationship('Bookmark',backref='saved_post',lazy=True)
 
+class Question(db.Model):
+    question_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_mgmt.id'), nullable=False)
+    question = db.Column(db.Text, nullable=False)
+    creation_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
+    update_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
+
+    # Relación con la tabla de usuarios
+    user = db.relationship('User_mgmt', backref='questions')
+
+    def __repr__(self):
+        return f"Question('{self.question_id}', '{self.user_id}', '{self.question}', '{self.creation_date}', '{self.update_date}')"
+
+class Answer(db.Model):
+    answer_id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.question_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_mgmt.id'), nullable=False)
+    answer = db.Column(db.Text, nullable=False)
+    creation_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
+    update_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
+
+    # Relaciones
+    question = db.relationship('Question', backref='answers', lazy=True)
+    user = db.relationship('User_mgmt', backref='answers', lazy=True)
+
+    def __repr__(self):
+        return f"Answer('{self.answer_id}', '{self.question_id}', '{self.user_id}', '{self.answer}', '{self.creation_date}', '{self.update_date}')"
 class Retweet(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     tweet_id = db.Column(db.Integer,db.ForeignKey('post.id'))

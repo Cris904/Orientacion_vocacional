@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter</title>
+    <title>TalentQuest</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='Images/SVG/twitter.svg') }}"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -15,63 +15,100 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+    <style>
+        /* Estilos para el footer */
+        .footer {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            margin-left: 20%; /* Ancho del navbar */
+            padding-bottom: 60px; /* Altura del footer */
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            left: 0;
+            width: 20%; /* Ancho del navbar */
+            height: 100%;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .navbar ul li {
+            display: block;
+        }
+        .navbar ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 0;
+            text-decoration: none;
+            font-size: 16px; /* Tamaño de fuente ajustable */
+        }
+        /* Cambiar color al pasar el mouse */
+        .navbar ul li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Alinear logo */
+        .navbar ul li img {
+            margin: 15px auto;
+            width: 30px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
+    <div class="navbar">
+        <ul>
+            <li><img src="{{ url_for('static', filename='Images/SVG/twitter.svg') }}" alt=""></li>
+            <li><a href="{{ url_for('account') }}">Perfil</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Inicio</a></li>
+            <!--<li><a href="#">Search</a></li>-->
+            <li><a href="{{ url_for('logout') }}">Log-Out</a></li>
+            <li><a href="{{ url_for('bookmarks') }}">Favoritos</a></li>
+            <li><a href="{{ url_for('formulario') }}">Formulario para orientación</a></li>
+        </ul>
+    </div>
+
     <div class="container">
-        <div class="navbar">
-            <ul>
-                <li><img src="{{ url_for('static', filename='Images/SVG/twitter.svg') }}" alt="" style="width: 50px; height: auto; margin-bottom: 30px;"></li>
-                <li><img src="{{ url_for('static', filename='Images/SVG/user.svg') }}" alt=""><a href="{{ url_for('account') }}">Profile</a></li>
-                <li><img src="{{ url_for('static', filename='Images/SVG/home.svg') }}" alt=""><a href="{{ url_for('dashboard') }}">Home</a></li>
-                <!--<li><img src="https://www.flaticon.com/svg/static/icons/svg/3077/3077325.svg" alt=""><a href="#">Search</a></li>-->
-                <li><img src="{{ url_for('static', filename='Images/SVG/logout.svg') }}" alt=""><a href="{{ url_for('logout') }}">logout</a></li>
-                <li><img src="{{ url_for('static', filename='Images/SVG/saved_posts.svg') }}" alt=""><a href="{{ url_for('bookmarks') }}">Saved</a></li>
-            </ul>
-        </div>
         <div class="posts">
             {% block pageContent %}
             {% endblock %}
         </div>
-        <div class="info">
-            <div class="notice">
-                <h2 class="header">Hey there!</h1>
-                <p class="meta">It's good to see you back! Before you start tweeting, make sure to keep the following point in mind.</p>
-                <p>Let's not spread any hate. Please ensure that there are not any tweets which may hurt the sentiments of a person or a community. Else, we would be forced to take down your tweet.</p>
-                <p>That being said, don't hold back. Twitter was made to allow propogation of free speech. So start tweeting away!</p>
-                <br>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                            {% for message in messages %}
-                            <div class="flash">{{ message }}</div>
-                            {% endfor %}
-                        {% endif %}
-                {% endwith %}
-            </div>
-        </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <p>TalentQuest - Transforma tu pasión en profesión &copy; <span id="currentYear"></span></p>
+    </div>
 
     <script language="javascript" type="text/javascript">
-        function chngimg() {
-            var img = document.getElementById('imgplus').src;
-            if (img.indexOf("{{ url_for('static', filename='Images/SVG/bookmark.svg') }}")!=-1) {
-                document.getElementById('imgplus').src  = "{{ url_for('static', filename='Images/SVG/bookmark_save.svg') }}";
-            }
-             else {
-               document.getElementById('imgplus').src = "{{ url_for('static', filename='Images/SVG/bookmark.svg') }}";
-           }
-    
-        }
-        // Get the modal
-        var modal = document.getElementById('id01');
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
+        // Obtener el elemento del año actual
+        var currentYearElement = document.getElementById("currentYear");
+        // Obtener el año actual
+        var currentYear = new Date().getFullYear();
+        // Insertar el año actual en el HTML
+        currentYearElement.textContent = currentYear;
     </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
 {% block pageContent %}
 
     <div class="alert">
-        <h3>Retweet this post?</h3>
+        <h3>¿Seguir esta publicación?</h3>
     </div>
 
     <div class="sample">
@@ -12,7 +12,7 @@
                 <img src="{{ url_for('static', filename='Images/Users/profile_pics/' + post.author.image_file) }}" style="width:50px; height: 50px; border-radius: 50%; margin-right: 10px; margin-top: 20px;" alt="">
                 <div>
                     <h3 style="margin-bottom: 0px;">@{{ post.author.username }}</h3>
-                    <p style="font-size: 12px;"><span style="font-weight: bold; color: dodgerblue;">Posted on </span>{{ post.stamp }}</p>
+                    <p style="font-size: 12px;"><span style="font-weight: bold; color: dodgerblue;">Publicado en </span>{{ post.stamp }}</p>
                 </div>
             </div>
             <p style="margin-top: 5px;">{{ post.tweet }}</p>
@@ -25,9 +25,9 @@
     <div class="choice alert">
         <form action="{{ url_for('retweet',post_id=post.id) }}" method="post">
             {{ tweet.csrf_token }}
-            <p>Add your own comment if you want.</p>
+            <p>Añade tu propio comentario si quieres.</p>
             {{tweet.tweet(class='retweet_pannel')}}
-            {{tweet.submit(class='submit_tweet',value='Retweet this post')}}
+            {{tweet.submit(class='submit_tweet',value='Seguir esta publicación')}}
         </form>
     </div>
 

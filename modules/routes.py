@@ -4,8 +4,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 from sqlalchemy import desc
 
 from modules import app,db
-from modules.modals import User_mgmt, Post, Retweet, Timeline, Bookmark
-from modules.forms import Signup, Login, UpdateProfile, createTweet
+from modules.modals import Answer, User_mgmt, Post, Retweet, Timeline, Bookmark
+from modules.forms import Signup, Login, UpdateProfile, createTweet, FormQuestion
 from modules.functions import save_bg_picture, save_profile_picture, delete_old_images, save_tweet_picture
 
 import datetime
@@ -34,7 +34,7 @@ def home():
 
     if form_sign.validate_on_submit():
 
-        hashed_password = generate_password_hash(form_sign.password.data, method='sha256')
+        hashed_password = generate_password_hash(form_sign.password.data, method='pbkdf2:sha256')
         x = datetime.datetime.now()
         creation = str(x.strftime("%B")) +" "+ str(x.strftime("%Y")) 
         new_user = User_mgmt(username=form_sign.username.data, email=form_sign.email.data, password=hashed_password, date=creation)
@@ -200,7 +200,7 @@ def dashboard():
         db.session.add(to_timeline)
         db.session.commit()
 
-        flash('The Tweet was added to your timeline!','success')
+        flash('¡La publicación ha sido añadida!','success')
         return redirect(url_for('dashboard'))
 
     page = request.args.get('page',1,type=int)
@@ -209,7 +209,47 @@ def dashboard():
         .paginate(page=page,per_page=5)
     return render_template('dashboard.html',name = current_user.username,tweet = user_tweet, timeline=timeline)
 
+@app.route('/formulario', methods=['GET', 'POST'])
+@login_required
+def formulario():
+    user_form = FormQuestion()
 
+    if user_form.validate_on_submit():
+        questions_answers = [
+            (1, user_form.edad.data),
+            (2, user_form.genero.data),
+            (3, user_form.ubicacion.data),
+            (4, user_form.estado_civil.data),
+            (5, user_form.discapacidad.data),
+            (6, user_form.intereses.data),
+            (7, user_form.habilidades.data),
+            (8, user_form.tiempo_libre.data),
+            (9, user_form.expectativas.data),
+            (10,user_form.experiencia.data),
+            (11,user_form.proyectos.data),
+            (12,user_form.nivel_educativo.data),
+            (13,user_form.titulo.data),
+            (14,user_form.curso.data),
+            (15,user_form.entorno_aprendizaje.data),
+            (16,user_form.equilibrio.data),
+            (17,user_form.enfoque.data),
+            (18,user_form.tamaño_institucion.data),
+            (19,user_form.meta_profesional.data),
+            (20,user_form.interes_areas.data),
+            (21,user_form.posgrado.data)
+        ]
+
+
+        for question_id, answer in questions_answers:
+            answer_obj = Answer(question_id=question_id, user_id=current_user.id, answer=answer, creation_date=datetime.now(), update_date=datetime.now())
+            db.session.add(answer_obj)
+
+        db.session.commit()
+        
+        flash('¡Respuestas enviadas con éxito!', 'success')
+        return redirect(url_for('formulario'))
+
+    return render_template('form.html', form=user_form, name=current_user.username)
 
 @app.route('/view_profile/<int:account_id>',methods=['GET','POST'])
 @login_required
@@ -239,7 +279,7 @@ def save_post(post_id):
     saved_post = Bookmark(post_id=post_id,user_id=current_user.id)
     db.session.add(saved_post)
     db.session.commit()
-    flash('Saved tweet to bookmark!','success')
+    flash('!Añadido a favoritos!','success')
     return redirect(url_for('dashboard'))
 
 
@@ -250,7 +290,7 @@ def unsave_post(post_id):
         .first()
     db.session.delete(removed_post)
     db.session.commit()
-    flash('Post removed from bookmark!','success')
+    flash('!Eliminado de favoritos!','success')
     return redirect(url_for('dashboard'))
 
 
@@ -299,7 +339,7 @@ def retweet(post_id):
         db.session.add(to_timeline)
         db.session.commit()
 
-        msg = 'You retweeted @'+post.author.username+"'s tweet!"
+        msg = 'Tu seguiste la publicación de @'+post.author.username+''
         flash(msg,'success')
         return redirect(url_for('dashboard'))
 
@@ -347,7 +387,7 @@ def delete_tweet(post_id):
     db.session.delete(post)
     db.session.commit()
 
-    flash('Your tweet was deleted!','success')
+    flash('Your publicación ha sido eliminada!','success')
     return redirect(url_for('dashboard'))
 
 @app.route('/delete_retweeted_post/<int:post_id>',methods=['POST'])
@@ -372,5 +412,5 @@ def delete_retweeted_tweet(post_id):
     db.session.delete(retweet)
     db.session.commit()
 
-    flash('Your tweet was deleted!','success')
+    flash('Your publiación ha sido eliminada!','success')
     return redirect(url_for('dashboard'))
