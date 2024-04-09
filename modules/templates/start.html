@@ -1,113 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TalentQuest</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/start.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/start.css') }}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="shortcut icon" href="https://img.icons8.com/fluent/48/000000/twitter.png"/>
-    <style>
-        /* Estilos personalizados */
-        .image-bg {
-            padding: 20px;
-        }
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/fluent/48/000000/twitter.png" />
+  </head>
 
-        .user-bg {
-            padding: 20px;
-        }
-
-        /* Estilos para hacer el formulario responsive */
-        @media (max-width: 768px) {
-            .form-group {
-                margin-bottom: 15px;
-            }
-
-            .login {
-                margin-top: 15px;
-            }
-
-            /* Estilos para los labels en pantallas pequeñas */
-            .form-group label {
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            /* Estilos adicionales para el Galaxy Fold */
-            .intro {
-                font-size: 18px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 image-bg">
-                <div class="about">
-                    <ul>
-                        <li><img class="icons" src="https://image.flaticon.com/icons/svg/3176/3176330.svg" alt="">Sigue tus intereses</li>
-                        <li><img src="https://image.flaticon.com/icons/svg/615/615075.svg" alt="" class="icons">Diseña tu futuro profesional</li>
-                        <li><img src="https://image.flaticon.com/icons/svg/3094/3094824.svg" alt="" class="icons">Persigue tus sueños profesionales</li>
-                    </ul>
-                </div>
+  <body>
+    <div class="container-fluid text-light vh-100">
+      <div class="row image-bg">
+        <!-- Sección izquierda -->
+        <div class="col-md-6 align-self-center text-center">
+          <!-- Carrusel bootstrap-->
+          <div
+            id="carouselExampleAutoplaying"
+            class="carousel slide about"
+            data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="https://image.flaticon.com/icons/svg/3176/3176330.svg "
+                  class="icons"
+                  alt="" />
+                Sigue tus intereses
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://image.flaticon.com/icons/svg/615/615075.svg"
+                  class="icons"
+                  alt="" />Diseña tu futuro profesional
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://image.flaticon.com/icons/svg/3094/3094824.svg"
+                  class="icons"
+                  alt="" />Persigue tus sueños profesionales
+              </div>
             </div>
-            <div class="col-md-6 user-bg">
-                <img src="https://image.flaticon.com/icons/svg/733/733579.svg" class="twitter" alt="">
-                <div class="intro">Transforma tu pasión <br> en profesión</div>
-                <p>¡Únete ahora!</p>
-                <form action="{{ url_for('home') }}" class="form-group" method="post">
-                    {{form1.csrf_token}}
-                    <div class="form-group">
-                        <label for="username">Usuario</label>
-                        {{form1.username(class='form-control',placeholder='Usuario')}}
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        {{form1.email(class='form-control',placeholder='Email')}}
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        {{form1.password(class='form-control',placeholder='Contraseña')}}
-                    </div>
-                    {{form1.signup(class='form-signup btn btn-primary')}}
-                </form>
-                <p>¿Ya tienes cuenta?
-                    <button type="button" class="btn btn-info btn-lg login" data-toggle="modal" data-target="#myModal">Login</button>
-                </p>
-            </div>
+          </div>
         </div>
+        <!--Formulario login -->
+        <div
+          class="col-md-6 vh-100 user-bg d-flex justify-content-center align-items-center p-0">
+          <div class="form-container">
+            <img
+              src="https://image.flaticon.com/icons/svg/733/733579.svg"
+              alt="" />
+            <h1 class="p-1 mb-2">
+              Transforma tu pasión <br />
+              <small class="fs-2 fw-bolder text-color-green"
+                >en profesión</small
+              >
+            </h1>
+            <div class="container-fluid ps-0 ms-0 mb-5">
+              <span class="p-1 fst-italic text-white-50">¡Únete ahora!</span>
+            </div>
+            <form
+              action="{{ url_for('home') }}"
+              class="form-group"
+              method="post">
+              {{form1.csrf_token}}
+              <div class="form-group p-1">
+                <label class="mb-1" for="username">Usuario</label>
+                {{form1.username(class='form-control',placeholder='Usuario')}}
+              </div>
+              <div class="form-group p-1">
+                <label class="mb-1" for="email">Email</label>
+                {{form1.email(class='form-control',placeholder='Email')}}
+              </div>
+              <div class="form-group p-1 mb-3">
+                <label class="mb-1" for="password">Contraseña</label>
+                {{form1.password(class='form-control',placeholder='Contraseña')}}
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div>
+                  {{form1.signup(class='form-signup button-color-green')}}
+                </div>
+              </div>
+            </form>
+            <div class="d-flex align-items-center">
+                <span>
+                  ¿Ya tienes cuenta?
+                  <a class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Login
+                  </a>
+              </span>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content" style="background-color: rgb(21, 32, 43);">
-                <div class="modal-header">
-                    <h4 class="modal-title" style="color: whitesmoke;">¡Bienvenido de vuelta!</h4>
-                </div>
-                <div class="modal-body">
-                    <p>¡Es bueno verte de vuelta!</p><br>
-                    <form action="{{ url_for('home') }}" class="form-group" method="post">
-                        {{form2.csrf_token}}
-                        <div class="form-group">
-                            <label for="username">Usuario</label>
-                            {{form2.username(class='login_control form-control',placeholder='Usuario')}}
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            {{form2.password(class='login_control form-control',placeholder='Contraseña')}}
-                        </div>
-                        <p style="color: aquamarine;">{{form2.remember(placeholder='remember me')}} Recuérdame</p>
-                        {{form2.login(class='login_btn btn btn-primary')}}
-                    </form>
-                </div>
-            </div>
+    <div div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color: rgb(21, 32, 43)">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color: whitesmoke">
+              ¡Bienvenido de vuelta!
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid text-light">
+                <p class="fs-5">Registra tus datos</p>
+                <form
+                  action="{{ url_for('home') }}"
+                  class="form-group"
+                  method="post">
+                  {{form2.csrf_token}}
+                  <div class="form-group p-1">
+                    <label class="mb-1" for="username">Usuario</label>
+                    {{form2.username(class='form-control',placeholder='Usuario')}}
+                  </div>
+                  <div class="form-group p-1 mb-3">
+                    <label class="mb-1" for="password">Contraseña</label>
+                    {{form2.password(class='form-control',placeholder='Contraseña')}}
+                  </div>
+                  <p style=" color: #128277;">
+                    {{form2.remember(placeholder='remember me')}} Recuérdame
+                  </p>
+                  {{form2.login(class='button-color-green')}}
+                </form>
+            </div>      
+          </div>
         </div>
+      </div>
     </div>
-</body>
+    <!-- scripts de bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"></script>
+  </body>
 </html>
