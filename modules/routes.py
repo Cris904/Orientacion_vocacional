@@ -9,6 +9,7 @@ from modules.forms import Signup, Login, UpdateProfile, createTweet, FormQuestio
 from modules.functions import save_bg_picture, save_profile_picture, delete_old_images, save_tweet_picture
 
 import datetime
+import folium
 
 
 
@@ -250,6 +251,17 @@ def formulario():
         return redirect(url_for('formulario'))
 
     return render_template('form.html', form=user_form, name=current_user.username)
+
+@app.route('/mapas', methods=['GET', 'POST'])
+@login_required
+def mapas():
+    # Crear un mapa con Folium
+    m = folium.Map(location=[4.699183370069549, -74.09056244479478], zoom_start=15)
+    folium.Marker([4.699183370069549, -74.09056244479478], popup='¡Aquí estás!').add_to(m)
+    
+    # Renderizar el template con el mapa en el frontend
+    return render_template('maps.html', mymap=m._repr_html_())
+
 
 @app.route('/view_profile/<int:account_id>',methods=['GET','POST'])
 @login_required

@@ -1,0 +1,38 @@
+{% block pageContent %}
+<h1 class="greeting">Bienvenido @{{ name }}!</h1>
+<div class="tweet">
+    <form id="careerForm" action="{{ url_for('mapas') }}" method="post">
+        <div style="display: flex;">
+            <div class="container">
+                <!-- Aquí se mostrará el mapa -->
+                <div id="map" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <!-- Aquí puedes agregar botones u otros elementos según sea necesario -->
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+<!-- Incluir la biblioteca Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Agregar un script para inicializar el mapa -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inicializar el mapa con Leaflet
+        var map = L.map('map').setView([4.699183370069549, -74.09056244479478], 15);
+        
+        // Agregar una capa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Renderizar el mapa generado por Folium
+        var mymap = '{{ mymap|tojson|safe }}'; // Obtener el HTML generado por Folium desde Flask
+        var mapContainer = document.getElementById('map');
+        mapContainer.innerHTML = mymap;
+    });
+</script>
